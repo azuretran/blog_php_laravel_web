@@ -5,18 +5,39 @@
 @section( 'content')
 <form action="#" method="POST">
     <div class="card-body">
-      <div class="form-group">
-        <label for="menu">Name Menu</label>
-        <input type="text" class="form-control" id="menu" placeholder="Enter name" name="name">
-      </div>
-      <div class="form-group">
-        <label > Menu List</label>
-        <select class="form-control" name="parent_id">
-            <option value="0">parent list</option>
-            @foreach($menus as $menu)
-            <option value="{{ $menu->id }}">{{ $menu->name }}</option>
-            @endforeach
-        </select>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group ">
+                    <label for="menu">Name Menu</label>
+                    <input type="text" class="form-control" id="menu" placeholder="Enter name" name="name">
+                  </div>
+            </div>
+           <div class="col-8">
+            <div class="form-group">
+                <label > Menu List</label>
+                <select class="form-control" name="parent_id">
+                    <option value="0">parent list</option>
+                    @foreach($menus as $menu)
+                    <option value="{{ $menu->id }}">{{ $menu->name }}</option>
+                    @endforeach
+                </select>
+              </div>
+           </div>
+             
+        </div>
+      <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+                <label for="origin_price">origin price</label>
+                <input type="number" class="form-control" name="price" id="origin_price">
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="form-group">
+                <label for="sale_price">sale price</label>
+                <input type="number" class="form-control" name="price_sale" id="sale_price">
+            </div>
+          </div>
       </div>
       <div class="form-group">
         <label for="description_details">Description Details</label>
@@ -28,13 +49,13 @@
     </div>
     <div class="form-group">
         <label for="menu">product image</label>
-        <input type="file" class="form-control-file" id="upload" >
+        <input type="file" class="form-control-file" id="upload" name="file">
         <div id="image_show">
 
 
         </div>
       </div>
-      <input type="hidden"  id="file" name="file">
+      <input type="hidden"  id="file">
     <div class="form-group">
         <label for="active_form">active</label>
         <div class="row">

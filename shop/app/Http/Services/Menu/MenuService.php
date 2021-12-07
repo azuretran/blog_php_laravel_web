@@ -40,4 +40,32 @@ class MenuService{
         return true;
     }
 
+    public function destroy( $request){
+        $id=(int)$request->input('id');
+
+        $menu=Menu::where('id',$request->input('id'))->first();
+        if($menu){
+            return Menu::where('id',$id)->orwhere('parent_id',$id)->delete();
+        }
+        return false;
+    }
+    public function update($request,$menu){
+        if($request->input('parent_id')!= $menu->id){
+            try{
+                $menu->fill($request->input());
+                $menu->save();
+                Session::flash('success','update list sucessful');
+
+            }
+            catch (\Exception $err){
+                Session::flash('error',$err->getMessage());
+                return false;
+            }
+            return true;
+
+        }
+
+    }
+
+
 }

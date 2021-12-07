@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Menu\MenuService;
 use App\Http\Requests\Menu\CreateFormRequest;
@@ -15,7 +16,7 @@ class MenuController extends Controller
     {
         $this->menuService=$menuService;
     }
-   
+
 
    public function create()
    {
@@ -34,4 +35,34 @@ class MenuController extends Controller
            'menus'=>$this->menuService->getAll()
        ]);
    }
+   public function destroy(Request $request):JsonResponse
+   {
+   $result=$this->menuService->destroy($request);
+    if($result){
+        return response()->json([
+            'error'=>false,
+            'message'=>'delete successfully'
+
+        ]);
+    }
+    return response()->json([
+        'error'=>true,
+
+
+    ]);
+   }
+   public function show(Menu $menu){
+
+    return view('admin.menu.edit',[
+        'title'=>'Edit list '.$menu->name,
+        'menu'=>$menu,
+        'menus'=>$this->menuService->get(0)
+    ]);
+   }
+   public function update(Menu $menu, CreateFormRequest $request)
+   {
+    $this->menuService->update($request,$menu);
+    return redirect('/admin/menus/list');
+    }
+    
 }
