@@ -25,7 +25,13 @@ class ProductRequest extends FormRequest
     {
         return [
            'name' =>'required',
-           'file'=>'required',
+           'thumb'=>'required',
+        ];
+    }
+    public function messages(){
+        return [
+            'name.required'=>'please input product name',
+            'thumb.required'=>'your profile  isn\'t a blank'
         ];
     }
 }

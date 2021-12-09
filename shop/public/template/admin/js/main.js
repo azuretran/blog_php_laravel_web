@@ -36,9 +36,9 @@ $('#upload').change(function(){
         url:'/admin/upload/services',
         success:function(results){
 
-              $('#file').val(results.url);
+              $('#thumb').val(results.url);
               console.log(results.url);
-           
+
 
         },
         error:function(xhr){

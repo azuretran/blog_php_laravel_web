@@ -11,11 +11,11 @@ use App\Http\Requests\Product\ProductRequest;
 class ProductController extends Controller
 {
     protected $ProductAdminService;
-    public function __construct(ProductAdminService $menuService)
+    public function __construct(ProductAdminService $ProductAdminService)
     {
-        $this->ProductAdminService=$menuService;
+        $this->ProductAdminService=$ProductAdminService;
     }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +24,11 @@ class ProductController extends Controller
     public function index()
     {
         //
+        return view('admin.product.list',[
+            'title'=>'list product',
+            'products'=>$this->ProductAdminService->getProduct()
+
+        ]);
     }
 
     /**
@@ -33,9 +38,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-       return view('admin.menu.add_product',[
+       return view('admin.product.add_product',[
            'title'=>"add new list",
-           'menus'=>$this->ProductAdminService->get(0)
+           'menus'=>$this->ProductAdminService->getAll()
        ]);
     }
     /**
@@ -49,6 +54,7 @@ class ProductController extends Controller
         //
         $this->ProductAdminService->insert($request);
         return redirect()->back();
+        //dd($request->input());
     }
 
     /**
@@ -95,5 +101,5 @@ class ProductController extends Controller
     {
         //
     }
-    
+
 }
